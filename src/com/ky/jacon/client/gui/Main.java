@@ -29,8 +29,8 @@ public class Main extends Application {
         Utils.stubs = (GlobalService) registry.lookup("JACON");
         
         StageSettings ss = new StageSettings();
-        ss.setTitle("Login");
-        ss.setPath("Login/view.fxml");
+        ss.setTitle("Login/Register");
+        ss.setPath("LoginRegister/view.fxml");
         Utils.redirect(ss);
     }
 

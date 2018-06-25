@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class StageSettings {
     private String title, path;
-    private boolean resizable, modal, fullscreen;
+    private boolean resizable = false, modal = false, fullscreen = false;
     private Stage previousStage;
 
     public String getTitle() {

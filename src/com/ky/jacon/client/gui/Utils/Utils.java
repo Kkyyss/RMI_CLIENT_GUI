@@ -5,6 +5,7 @@
  */
 package com.ky.jacon.client.gui.Utils;
 
+import com.ky.jacon.api.Model.User;
 import com.ky.jacon.api.services.GlobalService;
 import com.ky.jacon.client.gui.Main;
 import java.io.IOException;
@@ -29,6 +30,7 @@ import javafx.stage.StageStyle;
  */
 public class Utils {
     public static GlobalService stubs;
+    public static User userSess;
     
     public static void redirect(StageSettings ss) {
         loadWindow(ss);

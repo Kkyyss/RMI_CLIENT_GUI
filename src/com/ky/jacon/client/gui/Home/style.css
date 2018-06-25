@@ -1,8 +1,63 @@
-.jfx-button {
-  -fx-background-color: #0084ff;
+#logout-button {
+  -fx-background-color: black;
+     -fx-background-radius: 20;
   -fx-text-fill: white;
 }
 
-.jfx-button:hover {
-  -fx-background-color: #1ab7ea;
+#logout-button:hover {
+  -fx-background-color: gray;
 }
+
+#order-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-border-color: black;    
+}
+
+#order-button:hover {
+  -fx-background-color: black;
+  -fx-text-fill: white;    
+}
+
+.menu-add-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: blueviolet;
+    -fx-border-color: blueviolet;
+}
+
+.order-remove-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: red;
+    -fx-border-color: red;    
+}
+
+.trans-view-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-border-color: black;    
+}
+
+.menu-add-button:hover {
+  -fx-background-color: blueviolet;
+  -fx-text-fill: white;
+}
+
+.order-remove-button:hover {
+  -fx-background-color: red;
+  -fx-text-fill: white;    
+}
+
+.trans-view-button:hover {
+  -fx-background-color: black;
+  -fx-text-fill: white;    
+}
+
+.center-left-row {
+  -fx-alignment: CENTER_LEFT;
+  -fx-border-color: none;
+}
+.center-row {
+  -fx-alignment: CENTER;
+  -fx-border-color: none;    
+}
+
