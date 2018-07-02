@@ -8,6 +8,27 @@
   -fx-background-color: gray;
 }
 
+#search-button, #search-issue-button {
+    -fx-background-radius: 20;
+    -fx-background-color: #0084ff;
+    -fx-text-fill: white;
+}
+
+#search-button:hover,
+#search-issue-button:hover {
+  -fx-background-color: #1ab7ea;
+}
+
+#reload-button {
+  -fx-background-color: blue;
+     -fx-background-radius: 20;
+  -fx-text-fill: white;
+}
+
+#reload-button:hover {
+  -fx-background-color: gray;
+}
+
 #order-button {
     -fx-background-color: transparent;
     -fx-text-fill: black;

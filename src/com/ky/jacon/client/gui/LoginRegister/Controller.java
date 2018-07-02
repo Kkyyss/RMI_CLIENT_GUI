@@ -8,6 +8,7 @@ package com.ky.jacon.client.gui.LoginRegister;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.ky.jacon.api.Model.Email;
 import com.ky.jacon.api.Model.User;
 import com.ky.jacon.client.gui.Utils.StageSettings;
 import com.ky.jacon.client.gui.Utils.Utils;
@@ -16,6 +17,7 @@ import java.rmi.RemoteException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -70,57 +72,85 @@ public class Controller implements Initializable {
         User user = getLoginField();
         
         if (user == null) return;
-        
-        try {
-            user = Utils.stubs.login(user);
-            if (user != null) {
-                Utils.alertSuccess("Access Granted!");
-                Utils.userSess = user;
-                StageSettings ss = new StageSettings();
-                ss.setTitle("Home");
-                ss.setPath("Home/view.fxml");
-                Utils.redirect(rootPane, ss);
-            } else {
-                Utils.alertError("Access Denied: Invalid Credentials!");
+        rootPane.setDisable(true);
+        new Thread(() -> {
+            try {
+                final User u = Utils.stubs.login(user);
+                Platform.runLater(() -> {
+                    rootPane.setDisable(false);
+                    if (u != null) {
+                        Utils.alertSuccess("Access Granted!");
+                        Utils.userSess = u;
+                        StageSettings ss = new StageSettings();
+                        ss.setTitle("Home");
+                        ss.setPath("Home/view.fxml");
+                        Utils.redirect(rootPane, ss);
+                    } else {
+                        Utils.alertError("Access Denied: Invalid Credentials!");
+                    }                
+                });
+            } catch (RemoteException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (RemoteException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }).start();
     }
-
 
     @FXML
     private void registerAction(ActionEvent event) {
         User user = getRegisterField();
         
         if (user == null) return;
+        rootPane.setDisable(true);
+        new Thread(() -> {
+            try {
+                final User u = Utils.stubs.addUser(user);
+
+
+                Platform.runLater(() -> {
+                    rootPane.setDisable(false);
+                    if (u != null) {
+                        Utils.alertSuccess("Register successfully! Logged In...");
+                        new Thread(() -> {
+                            Email mail = new Email();
+                            mail.setTo(u.getEmail());
+                            mail.setSubject("Library Management System User Registration");
+                            mail.setContent(""
+                                    + "Dear " + u.getUsername() + ",\n\n\n"
+                                    + "Registered successfully!"
+                                            + "\n\n\n"
+                                            + "Thanks,\n"
+                                            + "Regards,\n"
+                                            + "KyMail");
+                            try {
+                                boolean sent = Utils.stubs.sendEmail(mail);
+                                Platform.runLater(() -> {
+                                    if (sent) {
+                                        Utils.alertSuccess("Norification Email sent successfully!");
+                                        
+                                    } else {
+                                        Utils.alertSuccess("Failed to send notifcation email!");
+                                    }
+                                });
+                            } catch (RemoteException ex) {
+                                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }).start();
+                        Utils.userSess = u;
+                        StageSettings ss = new StageSettings();
+                        ss.setTitle("Home");
+                        ss.setPath("Home/view.fxml");
+                        Utils.redirect(rootPane, ss);
+                    }
+                    else {
+                        Utils.alertError("Register failed: username/email exists!");
+                    }                         
+                });                   
+            } catch (RemoteException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }).start();
         
-        try {
-            user = Utils.stubs.addUser(user);
-            if (user != null) {
-                Utils.alertSuccess("Register successfully!");
-//                Email mail = new Email();
-//                mail.setFrom("");
-//                mail.setTo(user.getEmail());
-//                mail.setContent("Registered successfully!");
-                
-//                if (Utils.stubs.sendEmail(mail)) {
-//
-//                } else {
-//                    Utils.alertError("Connect to SMTP server failed!");
-//                }
-                // Utils.alertSuccess("Email sent!");
-                Utils.userSess = user;
-                StageSettings ss = new StageSettings();;
-                ss.setTitle("Home");
-                ss.setPath("Home/view.fxml");
-                Utils.redirect(rootPane, ss);
-            } else {
-                Utils.alertError("Register failed: username/email exists!");
-            }
-        } catch (RemoteException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        
     }
     
     private User getLoginField() {

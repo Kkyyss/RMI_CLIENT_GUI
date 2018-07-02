@@ -10,12 +10,12 @@
 
 <AnchorPane fx:id="rootPane" minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="800.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ky.jacon.client.gui.LoginRegister.Controller">
    <children>
-      <Label alignment="CENTER" prefHeight="54.0" prefWidth="800.0" text="JACON" textFill="#91cedd">
+      <Label alignment="CENTER" prefHeight="54.0" prefWidth="800.0" text="123" textFill="#91cedd">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutY="54.0" prefHeight="50.0" prefWidth="800.0" text="Food Delivery System" textFill="#e8a7a7">
+      <Label alignment="CENTER" layoutY="54.0" prefHeight="50.0" prefWidth="800.0" text="Library Management System" textFill="#e8a7a7">
          <font>
             <Font size="20.0" />
          </font>

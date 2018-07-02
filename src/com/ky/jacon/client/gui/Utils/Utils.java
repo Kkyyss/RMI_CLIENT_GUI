@@ -5,12 +5,15 @@
  */
 package com.ky.jacon.client.gui.Utils;
 
+import com.jfoenix.controls.JFXSpinner;
 import com.ky.jacon.api.Model.User;
 import com.ky.jacon.api.services.GlobalService;
 import com.ky.jacon.client.gui.Main;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -55,6 +58,7 @@ public class Utils {
 
   public static void loadWindow(StageSettings ss) {
     try {
+        System.out.print(ss.getPath());
       Parent parent = FXMLLoader.load(Main.class.getResource(ss.getPath()));
       Stage stage = new Stage(StageStyle.DECORATED);
       // stage.getIcons().add(new Image(Client.class.getClassLoader().getResourceAsStream("images/modules.png")));
@@ -63,8 +67,7 @@ public class Utils {
       stage.setResizable(ss.isResizable());
       stage.setMaximized(ss.isFullscreen());
       if (ss.isResizable()) {
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
@@ -96,7 +99,23 @@ public class Utils {
     alert.setResizable(false);
     alert.setHeaderText(null);
     alert.setContentText(msg);
-    alert.showAndWait();
+    
+    alert.getDialogPane().setPrefWidth(300);
+    alert.setX(0);
+    alert.setY(0);
+    alert.initModality(Modality.NONE);
+    alert.show();
+    new Thread(() -> {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+            Platform.runLater(() -> {
+                alert.close();
+            }); 
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }).start();
   }
   
   public static boolean alertConfirm(String title, String msg) {
@@ -108,4 +127,10 @@ public class Utils {
     alert.showAndWait();
     return alert.getResult() == ButtonType.OK;
   }    
+  
+    public static void fetching(AnchorPane pane, JFXSpinner spin, boolean isFetching) {
+        pane.setDisable(isFetching);
+        spin.setDisable(!isFetching);
+        spin.setVisible(isFetching);
+    }
 }
