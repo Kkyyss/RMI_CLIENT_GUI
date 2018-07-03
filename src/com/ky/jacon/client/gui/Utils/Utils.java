@@ -5,6 +5,7 @@
  */
 package com.ky.jacon.client.gui.Utils;
 
+import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXSpinner;
 import com.ky.jacon.api.Model.User;
 import com.ky.jacon.api.services.GlobalService;
@@ -129,6 +130,12 @@ public class Utils {
   }    
   
     public static void fetching(AnchorPane pane, JFXSpinner spin, boolean isFetching) {
+        pane.setDisable(isFetching);
+        spin.setDisable(!isFetching);
+        spin.setVisible(isFetching);
+    }
+    
+    public static void fetching(AnchorPane pane, JFXProgressBar spin, boolean isFetching) {
         pane.setDisable(isFetching);
         spin.setDisable(!isFetching);
         spin.setVisible(isFetching);

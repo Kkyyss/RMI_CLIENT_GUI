@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="rootPane" minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="543.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ky.jacon.client.gui.AddBook.Controller">
+   <children>
+      <JFXTextField fx:id="nametf" labelFloat="true" layoutX="37.0" layoutY="44.0" prefHeight="25.0" prefWidth="200.0" promptText="Name" />
+      <JFXTextField fx:id="authortf" labelFloat="true" layoutX="307.0" layoutY="44.0" prefHeight="25.0" prefWidth="200.0" promptText="Author" />
+      <JFXTextField fx:id="subjecttf" labelFloat="true" layoutX="37.0" layoutY="114.0" prefHeight="25.0" prefWidth="200.0" promptText="Subject" />
+      <JFXTextField fx:id="publishertf" labelFloat="true" layoutX="307.0" layoutY="114.0" prefHeight="25.0" prefWidth="200.0" promptText="Publisher" />
+      <JFXTextField fx:id="isbntf" labelFloat="true" layoutX="37.0" layoutY="181.0" prefHeight="25.0" prefWidth="200.0" promptText="ISBN" />
+      <JFXTextField fx:id="quantitytf" labelFloat="true" layoutX="307.0" layoutY="181.0" prefHeight="25.0" prefWidth="200.0" promptText="Quantity" text="0" />
+      <Label fx:id="abE1" layoutX="37.0" layoutY="76.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="abE2" layoutX="307.0" layoutY="76.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="abE3" layoutX="37.0" layoutY="146.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="abE4" layoutX="307.0" layoutY="146.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="abE5" layoutX="37.0" layoutY="213.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXSpinner fx:id="loaderSpin" layoutX="222.0" layoutY="114.0" prefHeight="65.0" prefWidth="99.0" visible="false" />
+      <JFXButton layoutX="37.0" layoutY="247.0" onAction="#addBookAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="ADD">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="307.0" layoutY="247.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="200.0" styleClass="secondary-button" text="CANCEL">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

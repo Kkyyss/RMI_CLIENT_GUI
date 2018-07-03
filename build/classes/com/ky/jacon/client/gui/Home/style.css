@@ -1,3 +1,13 @@
+.primary-button {
+    -fx-background-color: #0084ff;
+    -fx-text-fill: white;    
+}
+
+.secondary-button {
+    -fx-background-color: pink;
+    -fx-text-fill: black;     
+}
+
 #logout-button {
   -fx-background-color: black;
      -fx-background-radius: 20;

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="249.0" prefWidth="568.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.ky.jacon.client.gui.IssueBook.Controller">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+   <children>
+      <JFXTextField fx:id="tf1" labelFloat="true" layoutX="57.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" promptText="TP No." />
+      <JFXTextField fx:id="tf2" labelFloat="true" layoutX="308.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" promptText="ISBN" />
+      <Label fx:id="abE1" layoutX="57.0" layoutY="96.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="abE2" layoutX="308.0" layoutY="96.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXSpinner fx:id="loaderSpin" layoutX="235.0" layoutY="82.0" prefHeight="65.0" prefWidth="99.0" visible="false" />
+      <JFXButton layoutX="57.0" layoutY="151.0" onAction="#postAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="ADD">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="308.0" layoutY="151.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="200.0" styleClass="secondary-button" text="CANCEL">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
