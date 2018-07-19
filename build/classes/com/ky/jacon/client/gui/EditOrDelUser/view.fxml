@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="390.0" prefWidth="543.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ky.jacon.client.gui.EditOrDelUser.Controller">
+   <stylesheets>
+      <URL value="@../IssueOrReturnBook/style.css" />
+   </stylesheets>
+   <children>
+      <JFXSpinner fx:id="loaderSpin" layoutX="210.0" layoutY="149.0" prefHeight="65.0" prefWidth="99.0" visible="false" />
+      <JFXTextField fx:id="tf1" labelFloat="true" layoutX="38.0" layoutY="20.0" prefHeight="25.0" prefWidth="200.0" promptText="USERNAME">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXTextField>
+      <Label fx:id="elbl1" layoutX="38.0" layoutY="61.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="259.0" layoutY="20.0" onAction="#searchAction" prefHeight="39.0" prefWidth="115.0" styleClass="primary-button" text="SEARCH">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="382.0" layoutY="20.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="115.0" styleClass="secondary-button" text="CANCEL">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="saveInfoBtn" disable="true" layoutX="382.0" layoutY="162.0" onAction="#saveInfoAction" prefHeight="39.0" prefWidth="115.0" styleClass="primary-button" text="SAVE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="delBtn" disable="true" layoutX="38.0" layoutY="102.0" onAction="#delAction" prefHeight="39.0" prefWidth="115.0" styleClass="primary-button" text="DELETE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <Separator layoutX="38.0" layoutY="148.0" prefHeight="0.0" prefWidth="458.0" />
+      <Label fx:id="lbl1" layoutX="48.0" layoutY="167.0" prefHeight="27.0" prefWidth="163.0" text="Basic Information">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tf2" editable="false" labelFloat="true" layoutX="48.0" layoutY="207.0" prefHeight="25.0" prefWidth="200.0" promptText="USERNAME" />
+      <Label fx:id="elbl2" layoutX="48.0" layoutY="238.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tf3" editable="false" labelFloat="true" layoutX="267.0" layoutY="208.0" prefHeight="25.0" prefWidth="200.0" promptText="EMAIL" />
+      <Label fx:id="elbl3" layoutX="267.0" layoutY="239.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Separator layoutX="38.0" layoutY="264.0" prefHeight="0.0" prefWidth="458.0" />
+      <Label fx:id="lbl11" layoutX="48.0" layoutY="276.0" prefHeight="27.0" prefWidth="163.0" text="Password">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXPasswordField fx:id="tf4" editable="false" labelFloat="true" layoutX="48.0" layoutY="318.0" prefHeight="25.0" prefWidth="250.0" promptText="PASSWORD" />
+      <Label fx:id="elbl4" layoutX="48.0" layoutY="349.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="savePwdBtn" disable="true" layoutX="382.0" layoutY="276.0" onAction="#savePwdAction" prefHeight="39.0" prefWidth="115.0" styleClass="primary-button" text="SAVE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

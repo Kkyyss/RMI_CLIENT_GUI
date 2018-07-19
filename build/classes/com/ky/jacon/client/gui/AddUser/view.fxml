@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="359.0" prefWidth="513.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.ky.jacon.client.gui.AddUser.Controller">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+   <children>
+      <JFXTextField fx:id="tf1" focusColor="#6fe1c1" layoutX="89.0" layoutY="54.0" prefHeight="29.0" prefWidth="300.0" promptText="USERNAME" unFocusColor="#b2b2b2">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label fx:id="lbl1" layoutX="89.0" layoutY="87.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXPasswordField fx:id="tf2" focusColor="#6fe1c1" layoutX="89.0" layoutY="108.0" prefHeight="25.0" prefWidth="300.0" promptText="PASSWORD" unFocusColor="#b2b2b2">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXPasswordField>
+      <Label fx:id="lbl2" layoutX="89.0" layoutY="142.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tf3" focusColor="#6fe1c1" layoutX="89.0" layoutY="164.0" prefHeight="29.0" prefWidth="300.0" promptText="EMAIL" unFocusColor="#b2b2b2">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </JFXTextField>
+      <Label fx:id="lbl3" layoutX="89.0" layoutY="198.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="48.0" layoutY="266.0" onAction="#addAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="ADD">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="266.0" layoutY="266.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="200.0" styleClass="secondary-button" text="CANCEL">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXSpinner fx:id="loaderSpin" layoutX="207.0" layoutY="119.0" prefHeight="65.0" prefWidth="99.0" visible="false" />
+   </children>
+</AnchorPane>

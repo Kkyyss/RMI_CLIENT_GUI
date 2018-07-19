@@ -12,7 +12,6 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -60,19 +59,8 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initialTable();
-        Thread autoLoaderThread = new Thread(() -> {
-            while (true) {
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                    updateTable();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(com.ky.jacon.client.gui.ViewBook.Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        autoLoaderThread.setDaemon(true);
         
-        autoLoaderThread.start();
+        updateTable();
     }
     
     private void initialTable() {

@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import com.ky.jacon.api.Model.Book;
 import com.ky.jacon.client.gui.Utils.Utils;
+import static com.ky.jacon.client.gui.Utils.Utils.isCompleteField;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -32,29 +33,29 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private Label abE1;
-    @FXML
-    private Label abE2;
-    @FXML
-    private Label abE3;
-    @FXML
-    private Label abE4;
-    @FXML
-    private Label abE5;
-    @FXML
     private JFXSpinner loaderSpin;
     @FXML
-    private JFXTextField nametf;
+    private JFXTextField tf1;
     @FXML
-    private JFXTextField authortf;
+    private JFXTextField tf2;
     @FXML
-    private JFXTextField subjecttf;
+    private JFXTextField tf3;
     @FXML
-    private JFXTextField publishertf;
+    private JFXTextField tf4;
     @FXML
-    private JFXTextField isbntf;
+    private JFXTextField tf5;
     @FXML
-    private JFXTextField quantitytf;
+    private JFXTextField tf6;
+    @FXML
+    private Label lbl1;
+    @FXML
+    private Label lbl2;
+    @FXML
+    private Label lbl3;
+    @FXML
+    private Label lbl4;
+    @FXML
+    private Label lbl5;
 
     /**
      * Initializes the controller class.
@@ -66,10 +67,10 @@ public class Controller implements Initializable {
     }    
 
     private void initialInterface() {
-        quantitytf.textProperty().addListener(
+        tf6.textProperty().addListener(
                 (ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!newValue.matches("\\d*")) {
-                quantitytf.setText(newValue.replaceAll("[^\\d]", ""));
+                tf6.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });        
     }
@@ -77,21 +78,21 @@ public class Controller implements Initializable {
     @FXML
     private void addBookAction(ActionEvent event) {
         boolean completeFields;
-        String name = nametf.getText().trim();
-        String author = authortf.getText().trim();
-        String subject = subjecttf.getText().trim();
-        String pub = publishertf.getText().trim();
-        String isbn = isbntf.getText().trim();
-        int quantity = Integer.parseInt(quantitytf.getText());
+        String name = tf1.getText().trim();
+        String author = tf2.getText().trim();
+        String subject = tf3.getText().trim();
+        String pub = tf4.getText().trim();
+        String isbn = tf5.getText().trim();
+        int quantity = Integer.parseInt(tf6.getText());
 
         completeFields = isCompleteField(
                 name.isEmpty(),
-                abE1,
+                lbl1,
                 "Required Field!"
         );
         completeFields = isCompleteField(
                 isbn.isEmpty(),
-                abE5,
+                lbl5,
                 "Required Field!"
         );
         if (!completeFields || (
@@ -116,8 +117,8 @@ public class Controller implements Initializable {
                     Platform.runLater(() -> {
                         Utils.fetching(rootPane, loaderSpin, false);
                         if (myBook != null) {
+                            resetField();
                             Utils.alertSuccess(myBook.getBook_name() + " successfully added!");
-                            Utils.closeWindow(rootPane);
                         } else {
                             Utils.alertError("ISBN exist!");
                         }
@@ -130,14 +131,19 @@ public class Controller implements Initializable {
         }
     }
     
-    public boolean isCompleteField(boolean empty, Label errMsgLbl, String errMsg) {
-        if (empty) {
-          errMsgLbl.setText(errMsg);
-          return false;
-        }
-        errMsgLbl.setText(null);
-        return true;
-    }
+    private void resetField() {
+        tf1.clear();
+        tf2.clear();
+        tf3.clear();
+        tf4.clear();
+        tf5.clear();
+        tf6.setText("0");
+        lbl1.setText("");
+        lbl2.setText("");
+        lbl3.setText("");
+        lbl4.setText("");
+        lbl5.setText("");
+    }    
     
     @FXML
     private void cancelAction(ActionEvent event) {

@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/ViewIssue/Controller.java</file>
-            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/Utils/Utils.java</file>
-            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/ViewBook/Controller.java</file>
-            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/Home/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/AddUser/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/IssueOrReturnBook/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/ViewBooked/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/AddStudent/Controller.java</file>
         </group>
     </open-files>
 </project-private>

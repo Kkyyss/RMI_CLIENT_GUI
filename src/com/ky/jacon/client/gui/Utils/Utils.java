@@ -7,6 +7,7 @@ package com.ky.jacon.client.gui.Utils;
 
 import com.jfoenix.controls.JFXProgressBar;
 import com.jfoenix.controls.JFXSpinner;
+import com.ky.jacon.api.Model.Student;
 import com.ky.jacon.api.Model.User;
 import com.ky.jacon.api.services.GlobalService;
 import com.ky.jacon.client.gui.Main;
@@ -21,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
@@ -35,6 +37,7 @@ import javafx.stage.StageStyle;
 public class Utils {
     public static GlobalService stubs;
     public static User userSess;
+    public static Student studSess;
     
     public static void redirect(StageSettings ss) {
         loadWindow(ss);
@@ -139,5 +142,14 @@ public class Utils {
         pane.setDisable(isFetching);
         spin.setDisable(!isFetching);
         spin.setVisible(isFetching);
+    }
+    
+    public static boolean isCompleteField(boolean empty, Label errMsgLbl, String errMsg) {
+        if (empty) {
+          errMsgLbl.setText(errMsg);
+          return false;
+        }
+        errMsgLbl.setText(null);
+        return true;
     }
 }

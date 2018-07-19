@@ -13,14 +13,14 @@
         <URL value="@style.css" />
     </stylesheets>
    <children>
-      <JFXTextField fx:id="tf1" labelFloat="true" layoutX="57.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" promptText="TP No." />
-      <JFXTextField fx:id="tf2" labelFloat="true" layoutX="308.0" layoutY="65.0" prefHeight="25.0" prefWidth="200.0" promptText="ISBN" />
-      <Label fx:id="abE1" layoutX="57.0" layoutY="96.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+      <JFXTextField fx:id="tf1" labelFloat="true" layoutX="135.0" layoutY="14.0" prefHeight="25.0" prefWidth="300.0" promptText="ISBN" />
+      <JFXTextField fx:id="tf2" labelFloat="true" layoutX="134.0" layoutY="75.0" prefHeight="25.0" prefWidth="300.0" promptText="TP No." />
+      <Label fx:id="abE1" layoutX="135.0" layoutY="45.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Label fx:id="abE2" layoutX="308.0" layoutY="96.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+      <Label fx:id="abE2" layoutX="134.0" layoutY="106.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
          <font>
             <Font size="11.0" />
          </font>
@@ -31,12 +31,12 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="57.0" layoutY="206.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="451.0" styleClass="secondary-button" text="CANCEL">
+      <JFXButton layoutX="308.0" layoutY="151.0" onAction="#returnAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="RETURN">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="308.0" layoutY="151.0" onAction="#returnAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="RETURN">
+      <JFXButton layoutX="57.0" layoutY="206.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="451.0" styleClass="secondary-button" text="CANCEL">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>

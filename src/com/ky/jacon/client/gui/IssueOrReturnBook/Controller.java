@@ -49,6 +49,10 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        if (Utils.studSess != null) {
+            tf2.setText(Utils.studSess.getStudent_no());
+            tf2.setDisable(true);
+        }
     }    
 
     public boolean isCompleteField(boolean empty, Label errMsgLbl, String errMsg) {
@@ -67,16 +71,17 @@ public class Controller implements Initializable {
     
     private boolean invalidField() {
         boolean completeFields;
-        String studentNo = tf1.getText().trim().toLowerCase();
-        String bookISBN = tf2.getText().trim().toLowerCase();
+        String bookISBN = tf1.getText().trim().toLowerCase();
+        String studentNo = tf2.getText().trim().toLowerCase();
 
         completeFields = isCompleteField(
-                studentNo.isEmpty(),
+                bookISBN.isEmpty(),
                 abE1,
                 "Required Field!"
         );
+        
         completeFields = isCompleteField(
-                bookISBN.isEmpty(),
+                studentNo.isEmpty(),
                 abE2,
                 "Required Field!"
         );
@@ -90,8 +95,8 @@ public class Controller implements Initializable {
        
         if (invalidField()) return;
         
-        String studentNo = tf1.getText().trim().toLowerCase();
-        String bookISBN = tf2.getText().trim().toLowerCase();        
+        String bookISBN = tf1.getText().trim().toLowerCase();
+        String studentNo = tf2.getText().trim().toLowerCase();
         
         Utils.fetching(rootPane, loaderSpin, true);
         
@@ -102,7 +107,7 @@ public class Controller implements Initializable {
                 
                 if (student == null) {
                     Platform.runLater(() -> {
-                        isCompleteField(true, abE1, "Student not exist!");                  
+                        isCompleteField(true, abE2, "Student not exist!");                  
                     });
                 }
                 
@@ -110,7 +115,7 @@ public class Controller implements Initializable {
                 
                 if (book == null) {
                     Platform.runLater(() -> {
-                        isCompleteField(true, abE2, "Book not exist!");               
+                        isCompleteField(true, abE1, "Book not exist!");               
                     });
                 }
                 
@@ -144,8 +149,8 @@ public class Controller implements Initializable {
        
         if (invalidField()) return;
         
-        String studentNo = tf1.getText().trim().toLowerCase();
-        String bookISBN = tf2.getText().trim().toLowerCase();        
+        String bookISBN = tf1.getText().trim().toLowerCase();
+        String studentNo = tf2.getText().trim().toLowerCase();    
         
         Utils.fetching(rootPane, loaderSpin, true);
         

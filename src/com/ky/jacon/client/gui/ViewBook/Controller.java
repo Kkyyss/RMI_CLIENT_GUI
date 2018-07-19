@@ -12,7 +12,6 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -26,7 +25,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -67,20 +65,6 @@ public class Controller implements Initializable {
         initialTable();
         
         updateTable();
-
-        Thread autoLoaderThread = new Thread(() -> {
-            while (true) {
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                    updateTable();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        autoLoaderThread.setDaemon(true);
-        
-        autoLoaderThread.start();
     }
     
     private void initialTable() {
