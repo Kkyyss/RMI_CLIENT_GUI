@@ -1,59 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="359.0" prefWidth="513.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="com.ky.jacon.client.gui.AddUser.Controller">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ky.jacon.client.gui.AddUser.Controller">
     <stylesheets>
         <URL value="@style.css" />
     </stylesheets>
    <children>
-      <JFXTextField fx:id="tf1" focusColor="#6fe1c1" layoutX="89.0" layoutY="54.0" prefHeight="29.0" prefWidth="300.0" promptText="USERNAME" unFocusColor="#b2b2b2">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </JFXTextField>
-      <Label fx:id="lbl1" layoutX="89.0" layoutY="87.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <JFXPasswordField fx:id="tf2" focusColor="#6fe1c1" layoutX="89.0" layoutY="108.0" prefHeight="25.0" prefWidth="300.0" promptText="PASSWORD" unFocusColor="#b2b2b2">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </JFXPasswordField>
-      <Label fx:id="lbl2" layoutX="89.0" layoutY="142.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="tf3" focusColor="#6fe1c1" layoutX="89.0" layoutY="164.0" prefHeight="29.0" prefWidth="300.0" promptText="EMAIL" unFocusColor="#b2b2b2">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </JFXTextField>
-      <Label fx:id="lbl3" layoutX="89.0" layoutY="198.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <JFXButton layoutX="48.0" layoutY="266.0" onAction="#addAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="ADD">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="266.0" layoutY="266.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="200.0" styleClass="secondary-button" text="CANCEL">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </JFXButton>
-      <JFXSpinner fx:id="loaderSpin" layoutX="207.0" layoutY="119.0" prefHeight="65.0" prefWidth="99.0" visible="false" />
+      <JFXTabPane prefHeight="389.0" prefWidth="586.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="USER">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField fx:id="tf1" focusColor="#6fe1c1" layoutX="131.0" layoutY="36.0" prefHeight="29.0" prefWidth="300.0" promptText="USERNAME" unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl1" layoutX="131.0" layoutY="70.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXPasswordField fx:id="tf2" focusColor="#6fe1c1" layoutX="131.0" layoutY="109.0" prefHeight="25.0" prefWidth="300.0" promptText="PASSWORD" unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXPasswordField>
+                        <Label fx:id="lbl2" layoutX="131.0" layoutY="142.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tf3" focusColor="#6fe1c1" layoutX="131.0" layoutY="182.0" prefHeight="29.0" prefWidth="300.0" promptText="EMAIL" unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl3" layoutX="131.0" layoutY="215.0" prefHeight="18.0" prefWidth="300.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="53.0" layoutY="304.0" onAction="#addUserAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="ADD USER">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="331.0" layoutY="304.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="200.0" styleClass="secondary-button" text="CANCEL">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="tick1" layoutX="131.0" layoutY="258.0" selected="true" text="Active">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="STUDENT">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTextField fx:id="tf4" focusColor="#6fe1c1" labelFloat="true" layoutX="58.0" layoutY="33.0" prefHeight="29.0" prefWidth="200.0" promptText="TP No." unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl4" layoutX="58.0" layoutY="67.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tf5" focusColor="#6fe1c1" labelFloat="true" layoutX="310.0" layoutY="36.0" prefHeight="29.0" prefWidth="200.0" promptText="NAME" unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl5" layoutX="310.0" layoutY="69.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tf6" focusColor="#6fe1c1" labelFloat="true" layoutX="58.0" layoutY="104.0" prefHeight="29.0" prefWidth="200.0" promptText="INTAKE" unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl6" layoutX="58.0" layoutY="138.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tf7" focusColor="#6fe1c1" labelFloat="true" layoutX="310.0" layoutY="104.0" prefHeight="29.0" prefWidth="200.0" promptText="EMAIL" unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl7" layoutX="310.0" layoutY="137.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="tf8" focusColor="#6fe1c1" labelFloat="true" layoutX="58.0" layoutY="176.0" prefHeight="29.0" prefWidth="200.0" promptText="IC No." unFocusColor="#b2b2b2">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label fx:id="lbl8" layoutX="58.0" layoutY="209.0" prefHeight="18.0" prefWidth="200.0" textFill="RED">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="50.0" layoutY="305.0" onAction="#addStudentAction" prefHeight="39.0" prefWidth="200.0" styleClass="primary-button" text="ADD">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="342.0" layoutY="305.0" onAction="#cancelAction" prefHeight="39.0" prefWidth="200.0" styleClass="secondary-button" text="CANCEL">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="tick2" layoutX="58.0" layoutY="253.0" selected="true" text="Active">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+      <JFXSpinner fx:id="loaderSpin" prefHeight="65.0" prefWidth="99.0" visible="false" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="250.0" />
    </children>
 </AnchorPane>

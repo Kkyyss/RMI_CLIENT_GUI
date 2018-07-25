@@ -54,6 +54,8 @@ public class Controller implements Initializable {
     private JFXTabPane libraryPane;
     @FXML
     private Tab libraryManagementTab;
+    @FXML
+    private JFXButton viewBookedBtn;
 
     /**
      * Initializes the controller class.
@@ -69,8 +71,11 @@ public class Controller implements Initializable {
             tabPane.getTabs().remove(userTab);
             if (!Utils.userSess.getRole().getRole_name().equals("librarian")) {
                 libraryPane.getTabs().remove(libraryManagementTab);
-            }
+            }            
         }
+        if (!Utils.userSess.getRole().getRole_name().equals("student")) {
+            viewBookedBtn.setVisible(false);
+        }        
     }
     
     @FXML
@@ -129,58 +134,14 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void openAddUserAction(ActionEvent event) {
-        event.consume();
-        StageSettings ss = new StageSettings();
-        ss.setPath("AddUser/view.fxml");
-        ss.setTitle("Add User");
-        ss.setModal(true);
-        ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
-        Utils.loadWindow(ss);        
-    }
-
-    @FXML
     private void openVIewUserAction(ActionEvent event) {
         event.consume();
         StageSettings ss = new StageSettings();
         ss.setPath("ViewUser/view.fxml");
         ss.setTitle("View User");
-        // ss.setModal(true);
-        // ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
+        ss.setModal(true);
+        ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
         Utils.loadWindow(ss);
-    }
-
-    @FXML
-    private void openAddStudentAction(ActionEvent event) {
-        event.consume();
-        StageSettings ss = new StageSettings();
-        ss.setPath("AddStudent/view.fxml");
-        ss.setTitle("Add Student");
-        ss.setModal(true);
-        ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
-        Utils.loadWindow(ss);         
-    }
-
-    @FXML
-    private void openViewStudentAction(ActionEvent event) {
-        event.consume();
-        StageSettings ss = new StageSettings();
-        ss.setPath("ViewStudent/view.fxml");
-        ss.setTitle("View Student");
-        // ss.setModal(true);
-        // ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
-        Utils.loadWindow(ss);        
-    }
-
-    @FXML
-    private void openEditOrDelUserAction(ActionEvent event) {
-        event.consume();
-        StageSettings ss = new StageSettings();
-        ss.setPath("EditOrDelUser/view.fxml");
-        ss.setTitle("Edit/Delete User");
-        ss.setModal(true);
-        ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
-        Utils.loadWindow(ss);          
     }
 
     @FXML

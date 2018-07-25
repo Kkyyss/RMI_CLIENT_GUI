@@ -62,7 +62,7 @@ public class Utils {
 
   public static void loadWindow(StageSettings ss) {
     try {
-        System.out.print(ss.getPath());
+      System.out.println(ss.getPath());
       Parent parent = FXMLLoader.load(Main.class.getResource(ss.getPath()));
       Stage stage = new Stage(StageStyle.DECORATED);
       // stage.getIcons().add(new Image(Client.class.getClassLoader().getResourceAsStream("images/modules.png")));

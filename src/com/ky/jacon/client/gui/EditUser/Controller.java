@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.ky.jacon.client.gui.EditOrDelUser;
+package com.ky.jacon.client.gui.EditUser;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -11,6 +6,7 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import com.ky.jacon.api.Model.User;
 import com.ky.jacon.client.gui.Utils.Utils;
+import static com.ky.jacon.client.gui.ViewUser.Controller.userManagementSelectedTarget;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -35,10 +31,6 @@ public class Controller implements Initializable {
     @FXML
     private JFXSpinner loaderSpin;
     @FXML
-    private JFXTextField tf1;
-    @FXML
-    private Label elbl1;
-    @FXML
     private Label lbl1;
     @FXML
     private JFXTextField tf2;
@@ -57,11 +49,8 @@ public class Controller implements Initializable {
     @FXML
     private JFXButton saveInfoBtn;
     @FXML
-    private JFXButton delBtn;
-    @FXML
     private JFXButton savePwdBtn;
-    
-    private User targetedUser;
+
 
     /**
      * Initializes the controller class.
@@ -69,71 +58,9 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-
-    @FXML
-    private void searchAction(ActionEvent event) {
-        boolean isCompleted = false;
-        
-        String searchTxt = tf1.getText().trim().toLowerCase();
-        
-        isCompleted = Utils.isCompleteField(searchTxt.isEmpty(), elbl1, "Required field!");
-        
-        if (!isCompleted ||
-                searchTxt.isEmpty())
-            return;
-        
-        Utils.fetching(rootPane, loaderSpin, true);
-        new Thread(() -> {
-        
-            try {
-                targetedUser = Utils.stubs.getUserByUsername(searchTxt);
-                
-                Platform.runLater(() -> {
-                    Utils.fetching(rootPane, loaderSpin, false);
-                    if (targetedUser != null) {
-                        populateEditField();
-                    } else {
-                        resetEditField();
-                        Utils.isCompleteField(true, elbl1, "No such user!");
-                    }  
-                });
-            } catch (RemoteException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }).start();
-    }
-    
-    private void resetEditField() {
-        targetedUser = null;
-        delBtn.setDisable(true);
-        saveInfoBtn.setDisable(true);
-        savePwdBtn.setDisable(true); 
-        
-        tf2.setEditable(false);
-        tf3.setEditable(false);
-        tf4.setEditable(false);
-        
-        tf2.clear();
-        tf3.clear();
-        tf4.clear();
-        
-        elbl2.setText("");
-        elbl3.setText("");
-        elbl4.setText("");
-    }
-    
-    private void populateEditField() {
-        delBtn.setDisable(false);
-        saveInfoBtn.setDisable(false);
-        savePwdBtn.setDisable(false);
-        
-        tf2.setText(targetedUser.getUsername());
-        tf3.setText(targetedUser.getEmail());
-        tf4.clear();
-        tf2.setEditable(true);
-        tf3.setEditable(true);        
-        tf4.setEditable(true);
+        tf2.setText(userManagementSelectedTarget.getUsername());
+        tf3.setText(userManagementSelectedTarget.getEmail());
+        tf4.setText(userManagementSelectedTarget.getPassword());
     }
 
     @FXML
@@ -162,7 +89,7 @@ public class Controller implements Initializable {
             try {
                 User u = Utils.stubs.getUserByUsername(un);
                 
-                if (u != null && !u.getUser_id().equals(targetedUser.getUser_id())) {
+                if (u != null && !u.getUser_id().equals(userManagementSelectedTarget.getUser_id())) {
                     Platform.runLater(() -> {
                         Utils.isCompleteField(true, elbl2, "Username exist!");
                     });
@@ -171,23 +98,23 @@ public class Controller implements Initializable {
                 User u2 =  Utils.stubs.getUserByEmail(eml);
                 System.out.println(u2);
 
-                if (u2 != null && !u2.getEmail().equals(targetedUser.getEmail())) {
+                if (u2 != null && !u2.getEmail().equals(userManagementSelectedTarget.getEmail())) {
                     Platform.runLater(() -> {
                         Utils.isCompleteField(true, elbl3, "Email exist!");
                     });
                 }
                 
-                if ((u != null && !u.getUser_id().equals(targetedUser.getUser_id()))
+                if ((u != null && !u.getUser_id().equals(userManagementSelectedTarget.getUser_id()))
                         || 
-                        (u2 != null && !u2.getEmail().equals(targetedUser.getEmail()))
+                        (u2 != null && !u2.getEmail().equals(userManagementSelectedTarget.getEmail()))
                    ) {
                     Utils.fetching(rootPane, loaderSpin, false);
                     return;
                 }                
                 
-                targetedUser.setUsername(un);
-                targetedUser.setEmail(eml);
-                String rs = Utils.stubs.saveUserInfo(targetedUser);
+                userManagementSelectedTarget.setUsername(un);
+                userManagementSelectedTarget.setEmail(eml);
+                String rs = Utils.stubs.saveUserInfo(userManagementSelectedTarget);
                 
                 Platform.runLater(() -> {
                     Utils.fetching(rootPane, loaderSpin, false);
@@ -203,31 +130,6 @@ public class Controller implements Initializable {
         }).start();
     }
 
-    @FXML
-    private void delAction(ActionEvent event) {
-        if (Utils.alertConfirm("Delete user", "Are you sure to delete this user?")) {
-            Utils.fetching(rootPane, loaderSpin, true);
-            
-            new Thread(() -> {
-                try {
-                    String rs = Utils.stubs.deleteUser(targetedUser.getUser_id());
-                    
-                    Platform.runLater(() -> {
-                        Utils.fetching(rootPane, loaderSpin, false);
-                        if (rs == null) {
-                            Utils.alertSuccess("User deleted successfully!");
-                            resetEditField();
-                        } else {
-                            Utils.alertError(rs);
-                        }
-                    });
-                    
-                } catch (RemoteException ex) {
-                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }).start();
-        }
-    }
 
     @FXML
     private void savePwdAction(ActionEvent event) {
@@ -245,8 +147,8 @@ public class Controller implements Initializable {
         new Thread(() -> {
         
             try {
-                targetedUser.setPassword(pwd);
-                String rs = Utils.stubs.saveUserPwd(targetedUser);
+                userManagementSelectedTarget.setPassword(pwd);
+                String rs = Utils.stubs.saveUserPwd(userManagementSelectedTarget);
                 
                 Platform.runLater(() -> {
                     Utils.fetching(rootPane, loaderSpin, false);

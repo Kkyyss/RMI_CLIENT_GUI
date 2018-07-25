@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="rootPane" minHeight="0.0" minWidth="0.0" prefHeight="348.0" prefWidth="467.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ky.jacon.client.gui.Login.Controller">
    <children>
-      <Label alignment="CENTER" prefHeight="54.0" prefWidth="800.0" text="123" textFill="#91cedd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Label alignment="CENTER" prefHeight="54.0" prefWidth="800.0" text="kys123" textFill="#91cedd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
