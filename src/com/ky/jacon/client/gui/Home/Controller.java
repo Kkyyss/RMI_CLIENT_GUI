@@ -35,6 +35,8 @@ public class Controller implements Initializable {
     private JFXButton viewBookedBtn;
     @FXML
     private JFXButton viewIssueBtn;
+    @FXML
+    private JFXButton irBookBtn;
 
     /**
      * Initializes the controller class.
@@ -53,6 +55,7 @@ public class Controller implements Initializable {
             viewBookedBtn.setVisible(false);
         } else {
             viewIssueBtn.setVisible(false);
+            irBookBtn.setVisible(false);
         }
     }
     
@@ -74,15 +77,15 @@ public class Controller implements Initializable {
         ss.setModal(true);
         ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
         
-        Utils.loadWindow(ss);        
+        Utils.loadWindow(ss);
     }
 
     @FXML
     private void openViewBookAction(ActionEvent event) {
         event.consume();
         StageSettings ss = new StageSettings();
-        ss.setPath("ViewBook/view.fxml");
-        ss.setTitle("View Book");
+        ss.setPath("BookManagement/view.fxml");
+        ss.setTitle("Book Management");
         ss.setModal(true);
         ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
         Utils.loadWindow(ss);

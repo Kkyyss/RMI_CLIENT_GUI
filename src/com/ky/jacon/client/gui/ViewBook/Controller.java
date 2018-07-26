@@ -6,31 +6,21 @@
 package com.ky.jacon.client.gui.ViewBook;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXProgressBar;
-import com.ky.jacon.api.Model.Book;
-import com.ky.jacon.client.gui.Utils.StageSettings;
+import com.jfoenix.controls.JFXSpinner;
+import com.jfoenix.controls.JFXTextField;
+import com.ky.jacon.api.Model.Issue;
+import static com.ky.jacon.client.gui.BookManagement.Controller.bookManagementSelectedBook;
 import com.ky.jacon.client.gui.Utils.Utils;
-import static com.sun.javaws.CacheUtil.remove;
 import java.net.URL;
 import java.rmi.RemoteException;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -38,169 +28,72 @@ import javafx.util.Callback;
  * @author kys
  */
 public class Controller implements Initializable {
-    
-    private ObservableList<Book> sources = FXCollections.observableArrayList();
 
-    @FXML
-    private TableView<Book> t1;    
-    @FXML
-    private TableColumn<Book, String> col1;
-    @FXML
-    private TableColumn<Book, String> col2;
-    @FXML
-    private TableColumn<Book, String> col3;
-    @FXML
-    private TableColumn<Book, String> col4;
-    @FXML
-    private TableColumn<Book, String> col5;
-    @FXML
-    private TableColumn<Book, String> col6;
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private JFXProgressBar loaderBar;
+    private JFXSpinner loaderSpin;
     @FXML
-    private JFXButton addBookBtn;
-    
+    private JFXButton issueBtn;
+    @FXML
+    private JFXTextField tf1;
+    @FXML
+    private JFXTextField tf2;
+    @FXML
+    private JFXTextField tf3;
+    @FXML
+    private JFXTextField tf4;
+    @FXML
+    private JFXTextField tf5;
 
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        initialTable();
-        
-        updateTable();
-    }
-    
-    private void initialTable() {
-        if (Utils.studSess != null) {
-            addBookBtn.setVisible(false);
-            col5.setVisible(false);
-            col6.setVisible(false);
+        populateField();
+        if (Utils.studSess == null) {
+            issueBtn.setVisible(false);
         }
-        t1.setPlaceholder(new Label("No book available!"));
-        
-        col1.setCellValueFactory(new PropertyValueFactory<>("book_name"));
-        col2.setCellValueFactory(new PropertyValueFactory<>("book_author"));
-        col3.setCellValueFactory(new PropertyValueFactory<>("book_isbn"));
-        col4.setCellValueFactory(new PropertyValueFactory<>("book_quantity"));
-        // col5
-        editCol();
-        // col6
-        deleteCol();
     }
     
-    private void editCol() {
-        
+    private void populateField() {
+        tf1.setText(bookManagementSelectedBook.getBook_name());
+        tf2.setText(bookManagementSelectedBook.getBook_author());
+        tf3.setText(bookManagementSelectedBook.getBook_subject());
+        tf4.setText(bookManagementSelectedBook.getBook_publisher());
+        tf5.setText(bookManagementSelectedBook.getBook_isbn());
     }
-    
-    private void deleteCol() {
-        Callback<TableColumn<Book, String>, TableCell<Book, String>> cellRemove =       //
-        (final TableColumn<Book, String> param) -> {
-          final TableCell<Book, String> cell = new TableCell<Book, String>()
-          {
-            
-            final JFXButton rmBtn;
-            {
-              this.rmBtn = new JFXButton("DELETE");
-              this.rmBtn.setButtonType(JFXButton.ButtonType.RAISED);
-              this.rmBtn.getStyleClass().add("primary-button");
-            }
 
-            @Override
-            public void updateItem( String item, boolean empty )
-            {
-              super.updateItem( item, empty );
-              if ( empty )
-              {
-                setGraphic( null );
-                setText( null );
-              }
-              else
-              {
-                rmBtn.setOnAction(( ActionEvent event ) -> {
-                  Book b = getTableView().getItems().get( getIndex() );
-                  if (Utils.alertConfirm(
-                          "Attendance Management - Remove Attendance",
-                          "Are you sure to remove " + b.getBook_isbn() + " ?")) {
-                    remove(b);
-                  }
-                });
-                setGraphic( rmBtn );
-                setText( null );
-              }
-            }
-          };
-          return cell;
-        };
-        col6.setCellFactory(cellRemove);        
-    }
-    
-    private void remove(Book b) {
-        Utils.fetching(rootPane, loaderBar, true);
+    @FXML
+    private void issueBookAction(ActionEvent event) {
+        Utils.fetching(rootPane, loaderSpin, true);
+        
         new Thread(() -> {
             try {
-                String res = Utils.stubs.deleteBook(b.getBook_id());
-                
+                Issue tr = new Issue();
+
+                tr.setTr_student(Utils.studSess);
+                tr.setTr_book(bookManagementSelectedBook);
+                String rs = Utils.stubs.addIssue(tr);
+
                 Platform.runLater(() -> {
-                    Utils.fetching(rootPane, loaderBar, false);
-                    if (res != null) {
-                        Utils.alertError(res);
+                    if (rs == null) {
+                        Utils.alertSuccess("Issue created successfully!");                      
                     } else {
-                        Utils.alertSuccess(b.getBook_isbn() + " deleted successfully!");
-                        updateTable();
+                        Utils.alertError(rs);
                     }
-                });
-            } catch (RemoteException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }            
-        }).start();
-    }
-    
-    
-    
-    private void updateTable() {
-        Utils.fetching(rootPane, loaderBar, true);
-        new Thread(() -> {
-            try {
-                List<Book> bookList = Utils.stubs.getBooks();
-                Platform.runLater(() -> {
-                    
-                    sources.removeAll(sources);
-
-                    for (int i = 0; i < bookList.size(); i++) {
-                        Book book = bookList.get(i);
-
-                        sources.add(book);
-                    }
-                    t1.setItems(sources);
-                    Utils.fetching(rootPane, loaderBar, false);
+                    Utils.fetching(rootPane, loaderSpin, false);                    
                 });
             } catch (RemoteException ex) {
                 Logger.getLogger(com.ky.jacon.client.gui.Home.Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }            
         }).start();        
     }
 
     @FXML
-    private void reloadAction(ActionEvent event) {
-        updateTable();
-    }
-
-    @FXML
-    private void openAddBookAction(ActionEvent event) {
-        event.consume();
-        StageSettings ss = new StageSettings();
-        ss.setPath("AddBook/view.fxml");
-        ss.setTitle("Add Book");
-        ss.setModal(true);
-        ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
-        
-        Utils.loadWindow(ss);
-        updateTable();
-    }
-    
+    private void cancelAction(ActionEvent event) {
+        Utils.closeWindow(rootPane);
+    }    
 }

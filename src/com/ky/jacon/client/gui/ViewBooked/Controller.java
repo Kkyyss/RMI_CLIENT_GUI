@@ -5,7 +5,9 @@
  */
 package com.ky.jacon.client.gui.ViewBooked;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXProgressBar;
+import com.ky.jacon.api.Model.Book;
 import com.ky.jacon.api.Model.Issue;
 import com.ky.jacon.client.gui.Utils.Utils;
 import java.net.URL;
@@ -22,9 +24,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -50,6 +54,8 @@ public class Controller implements Initializable {
     private TableColumn<Issue, String> col4;
     @FXML
     private TableColumn<Issue, String> col5;
+    @FXML
+    private TableColumn<Issue, String> col6;
 
     /**
      * Initializes the controller class.
@@ -59,12 +65,81 @@ public class Controller implements Initializable {
         // TODO
         initialTable();
         
-        updateTable();   
+        updateTable();
+        returnCol();
     }    
 
     @FXML
     private void reloadAction(ActionEvent event) {
         updateTable();
+    }
+    
+    private void returnCol() {
+        Callback<TableColumn<Issue, String>, TableCell<Issue, String>> cellCol =       //
+        (final TableColumn<Issue, String> param) -> {
+          final TableCell<Issue, String> cell = new TableCell<Issue, String>()
+          {
+            final JFXButton rmBtn;
+            {
+              this.rmBtn = new JFXButton("RETURN");
+              this.rmBtn.setButtonType(JFXButton.ButtonType.RAISED);
+              this.rmBtn.getStyleClass().add("primary-button");
+            }
+
+            @Override
+            public void updateItem( String item, boolean empty )
+            {
+              super.updateItem( item, empty );
+              if ( empty )
+              {
+                setGraphic( null );
+                setText( null );
+              }
+              else
+              {
+                rmBtn.setOnAction(( ActionEvent event ) -> {
+                    Issue issue = getTableView().getItems().get( getIndex() );
+                  if (Utils.alertConfirm(
+                          "Book Management - Return Book",
+                          "Are you sure to return " + issue.getTr_book().getBook_isbn() + " ?")) {
+                    returnBook(issue.getTr_book());
+                  }
+                });
+                setGraphic( rmBtn );
+                setText( null );
+              }
+            }
+          };
+          return cell;
+        };
+        col6.setCellFactory(cellCol);        
+    }
+    
+    private void returnBook(Book book) {
+        Utils.fetching(rootPane, loaderBar, true);
+        
+        new Thread(() -> {
+            try {
+                Issue tr = new Issue();
+
+                tr.setTr_student(Utils.studSess);
+                tr.setTr_book(book);
+                
+                String rs = Utils.stubs.returnBook(tr);
+                
+                Platform.runLater(() -> {
+                    if (rs == null) {
+                        Utils.alertSuccess("Book returned successfully!");
+                    } else {
+                        Utils.alertError(rs);
+                    }
+                    updateTable();
+                    Utils.fetching(rootPane, loaderBar, false);
+                });
+            } catch (RemoteException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }).start();
     }
     
     private void initialTable() {

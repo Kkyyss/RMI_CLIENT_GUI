@@ -200,6 +200,7 @@ public class Controller implements Initializable {
         
         Student student = new Student();
         student.setEmail(eml.toLowerCase());
+        student.setUsername(tn.toUpperCase());
         student.setStudent_no(tn.toUpperCase());
         student.setStudent_name(un.toUpperCase());
         student.setStudent_intake(in.toUpperCase());

@@ -232,7 +232,7 @@ public class Controller implements Initializable {
                 rmBtn.setOnAction(( ActionEvent event ) -> {
                   User u = getTableView().getItems().get( getIndex() );
                   if (Utils.alertConfirm(
-                          "Attendance Management - Remove Attendance",
+                          "User Management - Remove User",
                           "Are you sure to remove " + u.getUsername() + " ?")) {
                     remove(u);
                   }

@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ky.jacon.client.gui.AddBook;
+package com.ky.jacon.client.gui.EditBook;
 
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 import com.ky.jacon.api.Model.Book;
 import com.ky.jacon.client.gui.Utils.Utils;
 import static com.ky.jacon.client.gui.Utils.Utils.isCompleteField;
+import static com.ky.jacon.client.gui.BookManagement.Controller.bookManagementSelectedBook;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.ResourceBundle;
@@ -33,8 +34,6 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane rootPane;
     @FXML
-    private JFXSpinner loaderSpin;
-    @FXML
     private JFXTextField tf1;
     @FXML
     private JFXTextField tf2;
@@ -56,6 +55,8 @@ public class Controller implements Initializable {
     private Label lbl4;
     @FXML
     private Label lbl5;
+    @FXML
+    private JFXSpinner loaderSpin;
 
     /**
      * Initializes the controller class.
@@ -64,6 +65,7 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initialInterface();
+        initializeField();
     }    
 
     private void initialInterface() {
@@ -72,11 +74,11 @@ public class Controller implements Initializable {
             if (!newValue.matches("\\d*")) {
                 tf6.setText(newValue.replaceAll("[^\\d]", ""));
             }
-        });
+        });        
     }
-    
+
     @FXML
-    private void addBookAction(ActionEvent event) {
+    private void saveBookAction(ActionEvent event) {
         boolean completeFields;
         String name = tf1.getText().trim();
         String author = tf2.getText().trim();
@@ -100,51 +102,41 @@ public class Controller implements Initializable {
                 isbn.isEmpty())
         ) return; 
 
-        Book book = new Book();
-        book.setBook_author(author);
-        book.setBook_isbn(isbn);
-        book.setBook_name(name);
-        book.setBook_publisher(pub);
-        book.setBook_quantity(quantity);
-        book.setBook_subject(subject);
+        bookManagementSelectedBook.setBook_author(author);
+        bookManagementSelectedBook.setBook_isbn(isbn);
+        bookManagementSelectedBook.setBook_name(name);
+        bookManagementSelectedBook.setBook_publisher(pub);
+        bookManagementSelectedBook.setBook_quantity(quantity);
+        bookManagementSelectedBook.setBook_subject(subject);
 
-        if (Utils.alertConfirm("Add Book", "Confirm add book?")) {
-            Utils.fetching(rootPane, loaderSpin, true);
+        Utils.fetching(rootPane, loaderSpin, true);
             new Thread(() -> {
                 try {
-                    final Book myBook = Utils.stubs.addBook(book);
+                    String res = Utils.stubs.saveBook(bookManagementSelectedBook);
 
                     Platform.runLater(() -> {
                         Utils.fetching(rootPane, loaderSpin, false);
-                        if (myBook != null) {
-                            resetField();
-                            Utils.alertSuccess(myBook.getBook_name() + " successfully added!");
+                        if (res == null) {
+                            Utils.alertSuccess("Updated successfully!");
                         } else {
-                            Utils.alertError("ISBN exist!");
+                            Utils.alertError(res);
                         }
                     });
                 } catch (RemoteException ex) {
                     Logger.getLogger(com.ky.jacon.client.gui.Home.Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }).start();            
-         
-        }
+        }).start();      
     }
     
-    private void resetField() {
-        tf1.clear();
-        tf2.clear();
-        tf3.clear();
-        tf4.clear();
-        tf5.clear();
-        tf6.setText("0");
-        lbl1.setText("");
-        lbl2.setText("");
-        lbl3.setText("");
-        lbl4.setText("");
-        lbl5.setText("");
-    }    
-    
+    private void initializeField() {
+        tf1.setText(bookManagementSelectedBook.getBook_name());
+        tf2.setText(bookManagementSelectedBook.getBook_author());
+        tf3.setText(bookManagementSelectedBook.getBook_subject());
+        tf4.setText(bookManagementSelectedBook.getBook_publisher());
+        tf5.setText(bookManagementSelectedBook.getBook_isbn());
+        tf6.setText(bookManagementSelectedBook.getBook_quantity() + "");
+    }     
+
     @FXML
     private void cancelAction(ActionEvent event) {
         Utils.closeWindow(rootPane);

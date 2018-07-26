@@ -23,7 +23,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <JFXButton layoutX="31.0" layoutY="25.0" onAction="#openViewBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW BOOK" />
-                        <JFXButton layoutX="277.0" layoutY="25.0" onAction="#openReturnOrIssueBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="ISSUE/RETURN BOOK" />
+                        <JFXButton fx:id="irBookBtn" layoutX="277.0" layoutY="25.0" onAction="#openReturnOrIssueBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="ISSUE/RETURN BOOK" />
                         <JFXButton fx:id="viewBookedBtn" layoutX="31.0" layoutY="107.0" onAction="#openBookedAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW BOOKED" />
                         <JFXButton fx:id="viewIssueBtn" layoutX="503.0" layoutY="25.0" onAction="#openViewIssueAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW ISSUE" />
                      </children>
