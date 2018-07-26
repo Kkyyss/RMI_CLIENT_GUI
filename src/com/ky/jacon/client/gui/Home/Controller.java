@@ -7,21 +7,14 @@ package com.ky.jacon.client.gui.Home;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
-import com.ky.jacon.api.Model.Book;
-import com.ky.jacon.api.Model.Issue;
-import com.ky.jacon.api.Model.Student;
 import com.ky.jacon.client.gui.Utils.StageSettings;
 import com.ky.jacon.client.gui.Utils.Utils;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 /**
@@ -33,29 +26,15 @@ public class Controller implements Initializable {
 
     @FXML
     private StackPane rootPane;
-    private TableView<Issue> trTable;
 
-    private ObservableList<Book> books = FXCollections.observableArrayList();
-    private ObservableList<Issue> transactions = FXCollections.observableArrayList();
-    
-    private Student selectedStudentForBooks = new Student();
-    
-    private TableColumn<Issue, String> trDate;
-    private TableColumn<Issue, String> trView;
-    private TableColumn<Issue, String> trBook;
-
-    @FXML
-    private JFXButton viewBookButton;
     @FXML
     private Tab userTab;
     @FXML
     private JFXTabPane tabPane;
     @FXML
-    private JFXTabPane libraryPane;
-    @FXML
-    private Tab libraryManagementTab;
-    @FXML
     private JFXButton viewBookedBtn;
+    @FXML
+    private JFXButton viewIssueBtn;
 
     /**
      * Initializes the controller class.
@@ -68,14 +47,13 @@ public class Controller implements Initializable {
     
     private void initialInterface() {
         if (!Utils.userSess.getRole().getRole_name().equals("admin")) {
-            tabPane.getTabs().remove(userTab);
-            if (!Utils.userSess.getRole().getRole_name().equals("librarian")) {
-                libraryPane.getTabs().remove(libraryManagementTab);
-            }            
+            tabPane.getTabs().remove(userTab);    
         }
-        if (!Utils.userSess.getRole().getRole_name().equals("student")) {
+        if (Utils.studSess == null) {
             viewBookedBtn.setVisible(false);
-        }        
+        } else {
+            viewIssueBtn.setVisible(false);
+        }
     }
     
     @FXML
@@ -88,7 +66,6 @@ public class Controller implements Initializable {
         Utils.redirect(rootPane, ss);
     }
     
-    @FXML
     private void openAddBookAction(ActionEvent event) {
         event.consume();
         StageSettings ss = new StageSettings();
@@ -106,8 +83,8 @@ public class Controller implements Initializable {
         StageSettings ss = new StageSettings();
         ss.setPath("ViewBook/view.fxml");
         ss.setTitle("View Book");
-        // ss.setModal(true);
-        // ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
+        ss.setModal(true);
+        ss.setPreviousStage((Stage) rootPane.getScene().getWindow());
         Utils.loadWindow(ss);
     }
 

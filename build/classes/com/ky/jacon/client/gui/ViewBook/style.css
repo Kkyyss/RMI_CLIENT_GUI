@@ -7,3 +7,8 @@
     -fx-background-color: pink;
     -fx-text-fill: black;     
 }
+
+.center-row {
+  -fx-alignment: CENTER;
+  -fx-border-color: none;    
+}

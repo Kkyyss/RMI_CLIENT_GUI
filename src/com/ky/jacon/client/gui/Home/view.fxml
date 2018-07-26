@@ -22,30 +22,10 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <JFXTabPane fx:id="libraryPane" layoutX="10.0" layoutY="11.0" prefHeight="440.0" prefWidth="734.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="6.0">
-                           <tabs>
-                              <Tab text="BASIC">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <JFXButton fx:id="viewBookButton" layoutX="277.0" layoutY="33.0" onAction="#openViewBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW BOOK" />
-                                          <JFXButton layoutX="43.0" layoutY="33.0" onAction="#openReturnOrIssueBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="ISSUE/RETURN BOOK" />
-                                          <JFXButton fx:id="viewBookedBtn" layoutX="43.0" layoutY="99.0" onAction="#openBookedAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW BOOKED" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </Tab>
-                              <Tab fx:id="libraryManagementTab" text="MANAGEMENT">
-                                <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                       <children>
-                                          <JFXButton layoutX="277.0" layoutY="30.0" onAction="#openViewIssueAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW ISSUE" />
-                                          <JFXButton layoutX="37.0" layoutY="30.0" onAction="#openAddBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="ADD BOOK" />
-                                       </children>
-                                    </AnchorPane>
-                                </content>
-                              </Tab>
-                           </tabs></JFXTabPane>
+                        <JFXButton layoutX="31.0" layoutY="25.0" onAction="#openViewBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW BOOK" />
+                        <JFXButton layoutX="277.0" layoutY="25.0" onAction="#openReturnOrIssueBookAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="ISSUE/RETURN BOOK" />
+                        <JFXButton fx:id="viewBookedBtn" layoutX="31.0" layoutY="107.0" onAction="#openBookedAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW BOOKED" />
+                        <JFXButton fx:id="viewIssueBtn" layoutX="503.0" layoutY="25.0" onAction="#openViewIssueAction" prefHeight="50.0" prefWidth="180.0" styleClass="primary-button" text="VIEW ISSUE" />
                      </children>
                   </AnchorPane>
               </content>

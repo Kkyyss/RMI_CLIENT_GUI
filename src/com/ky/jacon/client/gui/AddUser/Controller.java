@@ -6,7 +6,6 @@
 package com.ky.jacon.client.gui.AddUser;
 
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
@@ -21,8 +20,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -132,7 +129,7 @@ public class Controller implements Initializable {
         lbl6.setText("");
         lbl7.setText("");
         lbl8.setText("");
-    }    
+    }
     
     private User getUserValidateField() {
         boolean completeFields;
@@ -254,7 +251,7 @@ public class Controller implements Initializable {
                     Utils.fetching(rootPane, loaderSpin, false);
                     if (u3 != null) {
                         Utils.alertSuccess("User added successfully!");
-                        // sendEmail(u3);
+                        sendEmail(u3);
                     }
                     else {
                         Utils.alertError("Failed to add user!");
@@ -304,7 +301,7 @@ public class Controller implements Initializable {
                     
                     if (s2 != null) {
                         Utils.alertSuccess("Student added successfully!");
-                        // sendEmail(s2);
+                        sendEmail(s2);
                     }
                     else {
                         Utils.alertError("Failed to add student!");

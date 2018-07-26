@@ -222,9 +222,7 @@ public class Controller implements Initializable {
             public void updateItem( String item, boolean empty )
             {
               super.updateItem( item, empty );
-              if ( empty || 
-                      getTableView().getItems().get( getIndex() )
-                              .getRole().getRole_name().equals("student") )
+              if ( empty )
               {
                 setGraphic( null );
                 setText( null );
