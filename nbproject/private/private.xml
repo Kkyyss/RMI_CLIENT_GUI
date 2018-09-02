@@ -4,8 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/ViewUser/Controller.java</file>
-            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/AddUser/Controller.java</file>
-            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/ViewBook/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/AddBook/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/IssueOrReturnBook/Controller.java</file>
+            <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/ViewBooked/Controller.java</file>
             <file>file:/C:/Users/kys/NetBeansProjects/jacon-rmi-client-gui/src/com/ky/jacon/client/gui/Home/Controller.java</file>
         </group>
     </open-files>
